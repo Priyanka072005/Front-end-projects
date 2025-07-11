@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Poll</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(239, 180, 180);
+            height: 100vh;
+        }
+        .text{
+            margin: 10px 0;
+        }
+        .object{
+            height: 20px;
+            background: rgb(85, 85, 92);
+            width: 0;
+            transition: width 0.5s;
+            border-radius: 5px;
+        }
+        .poll-container{
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            
+        }
+        h5{
+            color: black;
+        }
+        button{
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background-color: blue;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgb(19, 19, 41);
+        }
+    </style>    
+</head>
+<body>
+    <div >
+        <h3 style="text-align: center;"><b>WEL ~ COME</b></h3>
+    
+        <div class="poll-container">
+            <h5><b>What's your favourite programming language?</b></h5>
+
+                <div class="text">
+                    <label>
+                        <input type = "radio" name="vote" value="C">C
+                    </label>
+                    <div class="object" id="C-poll"></div>
+                </div>
+
+                <div class="text">
+                    <label>
+                        <input type="radio" name="vote" value="Java">Java
+                    </label>
+                    <div class="object" id="Java-poll"></div>
+                </div>
+
+                <div class="text">
+                    <label>
+                        <input type="radio" name="vote" value="Python">Python
+                    </label>
+                    <div class="object" id="Python-poll"></div>
+                </div>
+
+                <div class="text">
+                    <label>
+                        <input type="radio" name = "vote" value="Cpp">Cpp
+                    </label>
+                    <div class="object" id="Cpp-poll"></div>
+                </div>
+
+                <div class="text">
+                    <label>
+                        <input type="radio" name="vote" value="JavaScript">JavaScript
+                    </label>
+                    <div class="object" id="JavaScript-poll"></div>
+                </div>
+
+                
+                <button onclick="submit()">Vote</button>
+
+            </div>
+    
+    </div>
+
+<script>
+    var votes = {C:5, Java:20,Python:10 ,Cpp:8,JavaScript:25 };
+
+    function updateBars(){
+        let totalVotes = Object.values(votes).reduce((a,b) => a + b,0)
+        for(let key in votes){
+            let bar = document.getElementById(key+'-poll');
+            if(bar){
+                let percentage = (votes[key]/totalVotes)*100;
+                bar.style.width = percentage + '%';
+
+            }
+        }
+    }
+    function submit(){
+        var selected = document.querySelector('input[name="vote"]:checked');
+        if(selected){
+            votes[selected.value] += 1;
+            updateBars();
+        }
+    }
+    updateBars();
+</script>
+</body>
+
+</html>
